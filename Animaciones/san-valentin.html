@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corazones de TyCodEx</title>
+    <link rel="icon" href="../assets/img/logo.png" type="image/png">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('img/family.png') no-repeat center center;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            font-family: 'Verdana', sans-serif;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loveMessage {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 22px;
+            border-radius: 18px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            font-size: 26px;
+            color: #e63946;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: messageBounce 1s infinite;
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes messageBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .loveMessage:hover {
+            transform: scale(1.08);
+        }
+
+        .floatingHearts {
+            position: absolute;
+            top: 18%;
+            left: 12%;
+            z-index: -1;
+            font-size: 48px;
+            color: #ff6b6b;
+            animation: heartFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes heartFloat {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            50% { transform: translateY(-140px) scale(1.4); opacity: 0.6; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .floatingHearts:nth-child(2) { left: 28%; animation-duration: 6s; }
+        .floatingHearts:nth-child(3) { left: 42%; animation-duration: 7s; }
+        .floatingHearts:nth-child(4) { left: 62%; animation-duration: 8s; }
+        .floatingHearts:nth-child(5) { left: 78%; animation-duration: 9s; }
+
+        .textElements {
+            position: absolute;
+            font-size: 17px;
+            font-family: 'Script MT Bold', cursive;
+            color: #e63946;
+            animation: textFade 6s ease-in-out infinite;
+            z-index: 1;
+            padding: 9px 18px;
+            border-radius: 22px;
+            background-color: rgba(255,255,255,0.75);
+            box-shadow: 0 3px 5px rgba(0,0,0,0.08);
+            max-width: 78vw;
+            word-break: break-word;
+        }
+
+        .textElements:nth-child(1) { top: 14%; left: 6%; text-align: left; animation-duration: 6s; }
+        .textElements:nth-child(2) { top: 24%; left: 6%; text-align: left; animation-duration: 7s; }
+        .textElements:nth-child(3) { top: 34%; left: 6%; text-align: left; animation-duration: 8s; }
+        .textElements:nth-child(4) { top: 14%; right: 6%; text-align: right; animation-duration: 6s; }
+        .textElements:nth-child(5) { top: 24%; right: 6%; text-align: right; animation-duration: 7s; }
+        .textElements:nth-child(6) { top: 34%; right: 6%; text-align: right; animation-duration: 8s; }
+
+        @keyframes textFade {
+            0% { opacity: 0; transform: scale(1.15); }
+            50% { opacity: 0.5; transform: scale(1.25); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .flowerEffects {
+            position: absolute;
+            bottom: 8px;
+            animation: flowerMove 5s ease-in-out infinite;
+            font-size: 28px;
+        }
+
+        @keyframes flowerMove {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { transform: translateY(-45px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0; }
+        }
+
+        .flowerEffects:nth-child(1) { left: 12%; animation-duration: 6s; }
+        .flowerEffects:nth-child(2) { left: 32%; animation-duration: 7s; }
+        .flowerEffects:nth-child(3) { left: 52%; animation-duration: 8s; }
+        .flowerEffects:nth-child(4) { left: 72%; animation-duration: 9s; }
+        .flowerEffects:nth-child(5) { left: 92%; animation-duration: 10s; }
+
+        .floatingBubbles {
+            position: absolute;
+            bottom: 8px;
+            font-size: 24px;
+            color: #ff6b6b;
+            animation: bubbleMove 7s ease-in-out infinite;
+        }
+
+        @keyframes bubbleMove {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            50% { transform: translateY(-95px) scale(1.25); opacity: 0.4; }
+            100% { transform: translateY(0) scale(1); opacity: 0.8; }
+        }
+
+        .floatingBubbles:nth-child(1) { left: 12%; animation-duration: 8s; }
+        .floatingBubbles:nth-child(2) { left: 32%; animation-duration: 9s; }
+        .floatingBubbles:nth-child(3) { left: 52%; animation-duration: 10s; }
+        .floatingBubbles:nth-child(4) { left: 72%; animation-duration: 11s; }
+        .floatingBubbles:nth-child(5) { left: 92%; animation-duration: 12s; }
+
+        #bubbleContainer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .messageBubble {
+            position: absolute;
+            font-size: 17px;
+            font-family: 'Script MT Bold', cursive;
+            color: #e63946;
+            background-color: rgba(255,255,255,0.75);
+            padding: 9px 18px;
+            border-radius: 22px;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.08);
+            animation: bubbleText 8s ease-in-out forwards;
+            white-space: nowrap;
+        }
+
+        @keyframes bubbleText {
+            0% { opacity: 0; transform: scale(0.5) translateY(0px); }
+            50% { opacity: 1; transform: scale(1.2) translateY(-45px); }
+            100% { opacity: 0; transform: scale(1) translateY(-90px); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                background-size: 100% 100%;
+                background-position: center top;
+            }
+            .loveMessage { font-size: 22px; padding: 18px; }
+            .textElements { font-size: 15px; padding: 7px 15px; }
+            .flowerEffects { font-size: 24px; }
+            .floatingBubbles { font-size: 20px; }
+        }
+        .backButton {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 18px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #e63946;
+            font-weight: bold;
+            border-radius: 12px;
+            text-decoration: none;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background-color 0.3s;
+            z-index: 10;
+        }
+
+        .backButton:hover {
+            background-color: #ffe6e6;
+            transform: scale(1.05);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="loveMessage">¡Te Quiero Mucho! ❤️</div>
+    <a href="../index.php" class="backButton">⬅ Volver</a>
+
+    <div id="bubbleContainer"></div>
+    <script>
+        const lovePhrases = [
+            "Eres mi gran amor ❤️",
+            "Gracias por tu presencia 🌟",
+            "Mi vida es mejor contigo 💕",
+            "Juntos por siempre 🥰",
+            "Eres mi inspiración 💖",
+            "Tu sonrisa me hace feliz 💫",
+            "Eres lo mejor de mi vida 😍",
+            "Cada momento contigo es especial ✨",
+            "Siempre en mis pensamientos 💭",
+            "Mi corazón es tuyo 💘"
+        ];
+
+        function generateFloatingText() {
+            const textBubble = document.createElement("div");
+            textBubble.className = "messageBubble";
+            textBubble.innerText = lovePhrases[Math.floor(Math.random() * lovePhrases.length)];
+            
+            const leftPos = Math.random() * 78 + 10;
+            const topPos = Math.random() * 78 + 10;
+            
+            textBubble.style.left = leftPos + "vw";
+            textBubble.style.top = topPos + "vh";
+            
+            const bubbleContainer = document.getElementById("bubbleContainer");
+            bubbleContainer.appendChild(textBubble);
+            
+            setTimeout(() => {
+                const bubbleRect = textBubble.getBoundingClientRect();
+                
+                if (bubbleRect.right > window.innerWidth) {
+                    const newLeft = window.innerWidth - bubbleRect.width - 8;
+                    textBubble.style.left = `${newLeft}px`;
+                }
+                
+                if (bubbleRect.bottom > window.innerHeight) {
+                    const newTop = window.innerHeight - bubbleRect.height - 8;
+                    textBubble.style.top = `${newTop}px`;
+                }
+                
+                if (bubbleRect.left < 0) {
+                    textBubble.style.left = "8px";
+                }
+                
+                if (bubbleRect.top < 0) {
+                    textBubble.style.top = "8px";
+                }
+            }, 10);
+            
+            setTimeout(() => {
+                textBubble.remove();
+            }, 8000);
+        }
+
+        setInterval(generateFloatingText, 500);
+    </script>
+</body>
+</html>
